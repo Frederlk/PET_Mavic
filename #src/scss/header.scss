@@ -1,0 +1,265 @@
+//====================================================================================================
+.header {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	&__wrapper {
+		@extend .no-anim;
+		margin-top: -40px;
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		transition: all 0.8s ease 0s;
+		&::after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: calc(100% + 30px);
+			top: 50%;
+			left: 0;
+			background-color: $black;
+			box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+			z-index: -1;
+			padding: 15px 0px;
+			transform: translate(0, -50%);
+			opacity: 0;
+			transition: all 0.8s ease 0s;
+		}
+	}
+
+	&__container {
+	}
+
+	&__body {
+		min-height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 5px;
+	}
+
+	&__logo {
+		position: relative;
+		z-index: 20;
+		display: flex;
+		align-items: center;
+		transition: all 0.3s ease 0s;
+		@include adaptiv-value("margin-right", 70, 0, 1);
+		@media (any-hover: hover) {
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+		@media (max-width: 1170px) {
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin-right: 0;
+			max-width: 130px;
+		}
+		@media (max-width: $md2+px) {
+			max-width: none;
+		}
+	}
+
+	&__image {
+		flex: 0 0 54px;
+		img {
+			max-width: 100%;
+		}
+	}
+
+	&__name {
+		margin-left: 10px;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 21 / 18 * 100%;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: $white;
+		@media (max-width: 1170px) {
+			flex: 1 1 100%;
+			margin: 10px 0px 0px 0px;
+		}
+		@media (max-width: $md2+px) {
+			display: none;
+		}
+	}
+
+	&__menu {
+	}
+
+	&__info {
+		display: flex;
+		align-items: center;
+		@media (max-width: 1170px) {
+			flex-wrap: wrap;
+			justify-content: center;
+			text-align: center;
+			max-width: 130px;
+		}
+	}
+
+	&__btn {
+		position: relative;
+		z-index: 20;
+		min-width: 115px;
+		min-height: 30px;
+		margin: 0px 0px 10px 0px;
+		@media (min-width: 1170px) {
+			margin: 0px 8px 0px 0px;
+		}
+		@media (max-width: $md2+px) {
+			margin: 0;
+		}
+	}
+
+	&__number {
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 18 / 16 * 100%;
+		color: $white;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+		@media (max-width: 1170px) {
+			flex: 1 1 100%;
+		}
+	}
+
+	&__icon {
+		margin-left: 30px;
+	}
+}
+.menu {
+	&__link {
+		@extend .text_1;
+		color: $white;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	&__body {
+		@media (max-width: $md2+px) {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			overflow: auto;
+			padding: 140px 24px 30px 24px;
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.5s ease 0s;
+			background-color: rgba(0, 0, 0, 0.9);
+			z-index: 10;
+			&::after {
+				content: "";
+				position: fixed;
+				width: 100%;
+				height: 60px;
+				top: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.9);
+			}
+			&._active {
+				opacity: 1;
+				visibility: visible;
+			}
+			@media (max-height: $md4+px) {
+				padding: 80px 24px 30px 24px;
+			}
+		}
+	}
+
+	&__list {
+		position: relative;
+		@media (min-width: $md2+px) {
+			margin: 0px 15px;
+			display: flex;
+			align-items: center;
+			li {
+				&:not(:last-child) {
+					@include adaptiv-value("margin-right", 20, 10, 1);
+				}
+			}
+		}
+		@media (max-width: $md2+px) {
+			padding: 0px 0px 35px 0px;
+			margin: 0px 0px 35px 0px;
+			li {
+				&:not(:last-child) {
+					margin: 0px 0px 35px 0px;
+				}
+			}
+			&::before {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: -24px;
+				width: calc(100% + 48px);
+				height: 1px;
+				background-color: $white;
+				opacity: 0.24;
+			}
+		}
+	}
+}
+//====================================================================================================
+
+.icon-menu {
+	display: none;
+	@media (max-width: $md2+px) {
+		display: block;
+		position: relative;
+		top: 0px;
+		right: 0px;
+		width: 24px;
+		height: 14px;
+		cursor: pointer;
+		z-index: 20;
+		span {
+			transition: all 0.3s ease 0s;
+			top: calc(50% - 1px);
+			right: 0px;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background-color: $white;
+			&:first-child {
+				top: 0px;
+			}
+			&:last-child {
+				top: auto;
+				bottom: 0px;
+			}
+			&:last-child {
+				width: 14px;
+			}
+		}
+		&._active {
+			span {
+				transform: scale(0);
+				&:first-child {
+					transform: rotate(-45deg);
+					top: calc(50% - 1px);
+				}
+				&:last-child {
+					transform: rotate(45deg);
+					bottom: calc(50% - 1px);
+					width: 100%;
+				}
+			}
+		}
+	}
+}

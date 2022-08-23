@@ -1,0 +1,55 @@
+//<BUTTONS (a.btn+tab)>====================================================================================================
+.btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: $white;
+	padding: 5px 15px;
+	border: 1px solid $white;
+	border-radius: 3px;
+	background-color: transparent;
+	transition: all 0.3s ease 0s;
+	text-transform: uppercase;
+	@media (any-hover: hover) {
+		&:hover {
+			color: $black;
+			background-color: $white;
+		}
+	}
+}
+//</BUTTONS>====================================================================================================
+
+//<INPUT (inp+tab)>====================================================================================================
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.input {
+	border-radius: 0 !important;
+	align-items: center;
+	width: 100%;
+	display: block;
+	padding: 10px 15px;
+	min-height: 45px;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0.95;
+	font-size: 13px;
+	line-height: 130%;
+	color: rgba(255, 255, 255, 0.4);
+	transition: all 0.3s ease 0s;
+	&._focus {
+		color: rgba(255, 255, 255, 1);
+	}
+	&._error {
+		color: rgba(255, 0, 0, 0.8);
+	}
+}
+textarea.input {
+	resize: none;
+	padding: 15px;
+}
