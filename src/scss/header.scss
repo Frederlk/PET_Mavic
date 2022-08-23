@@ -1,45 +1,49 @@
-//====================================================================================================
-//====================================================================================================
 .header {
-    position: absolute;
+    position: fixed;
+    z-index: 100;
     width: 100%;
     top: 0;
     left: 0;
-    &__wrapper {
-        @extend .no-anim;
-        margin-top: -40px;
-        position: fixed;
+    @extend %no-anim;
+    margin-top: rem(-40);
+    transition: margin-top 0.8s ease 0s;
+    &::after {
+        content: "";
+        position: absolute;
         width: 100%;
-        top: 0;
+        height: calc(100% + rem(30));
+        top: 50%;
         left: 0;
-        z-index: 100;
-        transition: all 0.8s ease 0s;
+        background-color: $black;
+        box-shadow: 0 0 rem(25) rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        padding: rem(15) 0px;
+        transform: translate(0, -50%);
+        opacity: 0;
+        transition: opacity 0.8s ease 0s;
+    }
+    .loaded & {
+        margin-top: rem(40);
+        @extend %anim;
+        @media (max-width: $tablet) {
+            margin-top: rem(20);
+        }
+        @media (max-width: $mobile) {
+            margin-top: rem(15);
+        }
+    }
+    &._header-scroll {
+        margin-top: rem(15);
         &::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: calc(100% + 30px);
-            top: 50%;
-            left: 0;
-            background-color: $black;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-            z-index: -1;
-            padding: 15px 0px;
-            transform: translate(0, -50%);
-            opacity: 0;
-            transition: all 0.8s ease 0s;
+            opacity: 0.6;
         }
     }
 
     &__container {
-    }
-
-    &__body {
-        min-height: 40px;
+        min-height: rem(40);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 5px;
     }
 
     &__logo {
@@ -47,45 +51,42 @@
         z-index: 20;
         display: flex;
         align-items: center;
-        transition: all 0.3s ease 0s;
-        @include adaptiv-value("margin-right", 70, 0, 1);
+        transition: opacity 0.3s ease 0s;
+        @include adaptiveValue("margin-right", 70, 10);
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        -webkit-tap-highlight-color: transparent;
         @media (any-hover: hover) {
             &:hover {
                 opacity: 0.5;
             }
         }
-        @media (max-width: 1170px) {
+        @media (max-width: em(1170)) {
             flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
             margin-right: 0;
-            max-width: 130px;
-        }
-        @media (max-width: $md2+px) {
-            max-width: none;
+            max-width: rem(130);
         }
     }
 
     &__image {
-        flex: 0 0 54px;
+        flex: 0 0 rem(54);
         img {
             max-width: 100%;
         }
     }
 
     &__name {
-        margin-left: 10px;
+        margin-left: rem(10);
         font-weight: 500;
-        font-size: 18px;
-        line-height: 21 / 18 * 100%;
+        font-size: rem(18);
+        line-height: math.div(21, 18);
         letter-spacing: 0.04em;
         text-transform: uppercase;
-        color: $white;
-        @media (max-width: 1170px) {
+        @media (max-width: em(1170)) {
             flex: 1 1 100%;
-            margin: 10px 0px 0px 0px;
+            margin-top: rem(10);
         }
-        @media (max-width: $md2+px) {
+        @media (max-width: $tablet) {
             display: none;
         }
     }
@@ -96,53 +97,54 @@
     &__info {
         display: flex;
         align-items: center;
-        @media (max-width: 1170px) {
+        @media (max-width: em(1170)) {
             flex-wrap: wrap;
             justify-content: center;
             text-align: center;
-            max-width: 130px;
+            max-width: rem(130);
         }
     }
 
     &__btn {
         position: relative;
         z-index: 20;
-        min-width: 115px;
-        min-height: 30px;
-        margin: 0px 0px 10px 0px;
-        @media (min-width: 1170px) {
-            margin: 0px 8px 0px 0px;
+        min-width: rem(115);
+        min-height: rem(30);
+        margin-bottom: rem(10);
+        @media (min-width: em(1170)) {
+            margin: 0px rem(8) 0px 0px;
         }
-        @media (max-width: $md2+px) {
+        @media (max-width: $tablet) {
             margin: 0;
+        }
+        @media (max-width: $mobileSmall) {
+            min-width: rem(105);
         }
     }
 
     &__number {
         font-weight: 700;
-        font-size: 16px;
-        line-height: 18 / 16 * 100%;
-        color: $white;
-        transition: all 0.3s ease 0s;
+        font-size: rem(16);
+        line-height: math.div(18, 16);
+        transition: opacity 0.3s ease 0s;
         @media (any-hover: hover) {
             &:hover {
                 opacity: 0.5;
             }
         }
-        @media (max-width: 1170px) {
+        @media (max-width: em(1170)) {
             flex: 1 1 100%;
         }
     }
 
     &__icon {
-        margin-left: 30px;
+        margin-left: rem(30);
     }
 }
 .menu {
     &__link {
-        @extend .text_1;
-        color: $white;
-        transition: all 0.3s ease 0s;
+        @extend %text_1;
+        transition: opacity 0.3s ease 0s;
         @media (any-hover: hover) {
             &:hover {
                 opacity: 0.5;
@@ -151,67 +153,67 @@
     }
 
     &__body {
-        @media (max-width: $md2+px) {
+        @media (max-width: $tablet) {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             overflow: auto;
-            padding: 140px 24px 30px 24px;
+            padding: rem(140) rem(24) rem(30) rem(24);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease 0s;
+            @include scrollbars(rem(5), $white, $dark);
+            transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
             background-color: rgba(0, 0, 0, 0.9);
             z-index: 10;
             &::after {
                 content: "";
                 position: fixed;
                 width: 100%;
-                height: 60px;
+                height: rem(60);
                 top: 0;
                 left: 0;
                 background-color: rgba(0, 0, 0, 0.9);
             }
-            &._active {
+            .menu-open & {
                 opacity: 1;
                 visibility: visible;
             }
-            @media (max-height: $md4+px) {
-                padding: 80px 24px 30px 24px;
-            }
+        }
+        @media (max-width: $mobileSmall) {
+            padding: rem(80) rem(24) rem(30) rem(24);
         }
     }
 
     &__list {
-        position: relative;
-        @media (min-width: $md2+px) {
-            margin: 0px 15px;
+        @media (min-width: $tablet) {
+            margin: 0px rem(15);
             display: flex;
             align-items: center;
-            li {
-                &:not(:last-child) {
-                    @include adaptiv-value("margin-right", 20, 10, 1);
-                }
-            }
+            @include adaptiveValue("gap", 20, 10);
         }
-        @media (max-width: $md2+px) {
-            padding: 0px 0px 35px 0px;
-            margin: 0px 0px 35px 0px;
-            li {
-                &:not(:last-child) {
-                    margin: 0px 0px 35px 0px;
-                }
-            }
+        @media (max-width: $tablet) {
+            position: relative;
+            margin-bottom: rem(35);
+            padding-bottom: rem(35);
             &::before {
                 content: "";
                 position: absolute;
                 bottom: 0;
-                left: -24px;
-                width: calc(100% + 48px);
-                height: 1px;
+                left: rem(-24);
+                width: calc(100% + rem(48));
+                height: rem(1);
                 background-color: $white;
                 opacity: 0.24;
+            }
+        }
+    }
+
+    &__item {
+        @media (max-width: $tablet) {
+            &:not(:last-child) {
+                margin-bottom: rem(35);
             }
         }
     }
@@ -220,102 +222,49 @@
 
 .icon-menu {
     display: none;
-    @media (max-width: $md2+px) {
+    @media (max-width: $tablet) {
         display: block;
         position: relative;
-        top: 0px;
-        right: 0px;
-        width: 24px;
-        height: 14px;
+        width: rem(24);
+        height: rem(14);
         cursor: pointer;
         z-index: 20;
-        span {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        -webkit-tap-highlight-color: transparent;
+        span,
+        &::before,
+        &::after {
+            content: "";
             transition: all 0.3s ease 0s;
-            top: calc(50% - 1px);
-            right: 0px;
+            right: 0;
             position: absolute;
             width: 100%;
-            height: 2px;
+            height: rem(2);
             background-color: $white;
-            &:first-child {
-                top: 0px;
-            }
-            &:last-child {
-                top: auto;
-                bottom: 0px;
-            }
-            &:last-child {
-                width: 14px;
-            }
         }
-        &._active {
+        &::before {
+            top: 0;
+        }
+        &::after {
+            bottom: 0;
+            width: rem(14);
+        }
+        span {
+            top: calc(50% - rem(1));
+        }
+        .menu-open & {
             span {
-                transform: scale(0);
-                &:first-child {
-                    transform: rotate(-45deg);
-                    top: calc(50% - 1px);
-                }
-                &:last-child {
-                    transform: rotate(45deg);
-                    bottom: calc(50% - 1px);
-                    width: 100%;
-                }
+                width: 0;
+            }
+            &::before {
+                top: calc(50% - rem(1));
+                transform: rotate(-45deg);
+            }
+            &::after {
+                bottom: calc(50% - rem(1));
+                transform: rotate(45deg);
+                width: 100%;
             }
         }
     }
 }
-
-//====================================================================================================
-
-//Burger
-/*
-.icon-menu {
-	display: none;
-	@media (max-width: $mobile) {
-		display: block;
-		position: relative;
-		width: rem(30);
-		height: rem(18);
-		cursor: pointer;
-		z-index: 5;
-    	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-   		-webkit-tap-highlight-color: transparent;
-		span,
-		&::before,
-		&::after {
-			content: "";
-			transition: all 0.3s ease 0s;
-			right: 0;
-			position: absolute;
-			width: 100%;
-			height: rem(2);
-			background-color: #000;
-		}
-		&::before {
-			top: 0;
-		}
-		&::after {
-			bottom: 0;
-		}
-		span {
-			top: calc(50% - rem(1));
-		}
-		.menu-open & {
-			span {
-				width: 0;
-			}
-			&::before,
-			&::after {
-			}
-			&::before {
-				top: calc(50% - rem(1));
-				transform: rotate(-45deg);
-			}
-			&::after {
-				bottom: calc(50% - rem(1));
-				transform: rotate(45deg);
-			}
-		}
-	}
-}
-*/

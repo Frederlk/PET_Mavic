@@ -50,8 +50,8 @@ $responsiveType: 1;
 @import "base/null";
 
 body {
-    @include scrollbars(5px, $white, $dark);
     background-color: $black;
+    @include scrollbars(rem(5), $white, $dark);
     // Скролл заблокирован
     .lock & {
         overflow: hidden;
@@ -59,38 +59,12 @@ body {
     }
     // Сайт загружен
     .loaded & {
-    }
-    &._loaded {
-        .header__wrapper {
-            margin-top: 40px;
-            @extend .anim;
-            @media (max-width: $md2+px) {
-                margin-top: 20px;
-            }
-            @media (max-width: $md3+px) {
-                margin-top: 15px;
-            }
-        }
-        .slider-what {
-            display: block;
-        }
-        .page {
-            @extend .anim;
-        }
-        .screen-home__title,
-        .screen-home__image,
-        .screen-home__text,
-        .screen-home__social {
+        .home__title,
+        .home__image,
+        .home__text,
+        .home__social {
             transform: translate(0px, 0px);
-            @extend .anim;
-        }
-    }
-    &._scroll {
-        .header__wrapper {
-            margin-top: 15px;
-            &::after {
-                opacity: 0.6;
-            }
+            @extend %anim;
         }
     }
 }
@@ -174,7 +148,30 @@ body {
 //========================================================================================================================================================
 
 .page {
-    flex: 1 1 auto;
-    transition: all 0.5s ease 0s;
-    @extend .no-anim;
+    @extend %no-anim;
+    transition: opacity 0.5s ease 0s, visibility 0.5s ease 0s;
+    .loaded & {
+        @extend %anim;
+    }
+    &__content {
+        position: relative;
+    }
+    &__bg-ibg {
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(107.54deg, rgba(23, 26, 28, 0.72) 0%, #5e5e57 100%);
+            opacity: 0.15;
+        }
+    }
 }

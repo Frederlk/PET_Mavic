@@ -1,77 +1,138 @@
-//<ОСНОВНОЙ БЛОК>====================================================================================================
-.text_1 {
+%text_1 {
     font-weight: 500;
-    font-size: 15px;
-    line-height: 17 / 15 * 100%;
+    font-size: rem(15);
+    line-height: math.div(17, 15);
 }
-.text_2 {
+
+%text_2 {
     font-weight: 300;
-    font-size: 17px;
+    font-size: rem(17);
     line-height: 150%;
 }
-.text_3 {
+
+%text_3 {
     font-weight: 300;
-    font-size: 15px;
+    font-size: rem(15);
     line-height: 130%;
 }
-.subtitle {
-    font-weight: 700;
-    @include adaptiv-font(21, 17, 1);
-    line-height: 24 / 21 * 100%;
-}
-.title {
-    font-family: "SFPro";
-    @include adaptiv-font(44, 32, 1);
-    line-height: 53 / 44 * 100%;
-    color: #ffffff;
-}
-.no-anim {
-    visibility: hidden;
-    opacity: 0;
-}
-.anim {
-    visibility: visible;
-    opacity: 1;
-}
-//</ОСНОВНОЙ БЛОК>====================================================================================================
 
-//========================================================================================================================================================
+%subtitle {
+    font-weight: 700;
+    @include adaptiveValue("font-size", 21, 17);
+    line-height: math.div(24, 21);
+}
+
+%title {
+    font-family: "SFPro";
+    @include adaptiveValue("font-size", 44, 32);
+    line-height: math.div(53, 44);
+}
+
+%no-anim {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+%anim {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+//</ОСНОВНОЙ БЛОК>====================================================================================================
 
 .scroll-btn {
     text-align: center;
-    @include adaptiv-value("margin-bottom", 40, 20, 1);
-    transition: all 0.5s ease 0s;
-    @extend .no-anim;
-    &._animate {
-        @extend .anim;
-    }
-    &_footer {
-        transform: rotate(-180deg);
-    }
+    @include adaptiveValue("margin-bottom", 40, 20);
+    @include inViewBasic(0, 0, 0.8, 0);
     &__link {
         position: relative;
         animation: arrow 2s infinite ease;
         opacity: 0.64;
-        transition: all 0.3s ease 0s;
-        padding: 10px;
+        transition: opacity 0.3s ease 0s;
+        padding: rem(10);
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        -webkit-tap-highlight-color: transparent;
         img {
             max-width: 100%;
+            .scroll-btn_footer & {
+                transform: rotate(-180deg);
+            }
         }
-        @media (min-width: $md2+px) {
+        @media (any-hover: hover) {
             &:hover {
                 opacity: 1;
             }
         }
     }
+
     @keyframes arrow {
         0% {
             top: 0;
         }
         50% {
-            top: 10px;
+            top: rem(10);
         }
         100% {
             top: 0;
+        }
+    }
+}
+
+//========================================================================================================================================================
+
+.screen {
+    position: relative;
+    overflow: hidden;
+    &__container {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    &__inner {
+        @include adaptiveValue("padding-top", 150, 90);
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        position: relative;
+        @media (min-width: $pc) {
+            padding-left: rem(26);
+            padding-right: rem(26);
+        }
+    }
+
+    &__title {
+        @extend %title;
+        @include adaptiveValue("margin-bottom", 55, 20);
+        // ANIMATION ==================================================================================================================================================
+        @include inViewBasic(-20%, 0, 0.8, 0);
+    }
+
+    &__image-ibg {
+        position: absolute;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.4;
+            background: radial-gradient(
+                45.97% 54.43% at 50% 45.57%,
+                rgba(255, 0, 0, 0) 50.28%,
+                rgba(23, 26, 28, 0.00225974) 50.29%,
+                rgba(4, 5, 5, 0.820343) 58.72%,
+                rgba(5, 5, 6, 0.792703) 80.08%,
+                #000000 87.89%
+            );
         }
     }
 }

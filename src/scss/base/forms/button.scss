@@ -1,30 +1,14 @@
-//<BUTTONS (a.btn+tab)>
-// Снипет (HTML): btn
-
-.button {
-    display: inline-flex;
-    padding: 0px 0px;
-    @media (any-hover: hover) {
-        &:hover {
-        }
-    }
-    &._fw {
-        width: 100%;
-    }
-}
-
-//<BUTTONS (a.btn+tab)>====================================================================================================
 .btn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: $white;
-    padding: 5px 15px;
-    border: 1px solid $white;
-    border-radius: 3px;
+    padding: rem(5) rem(15);
+    border: rem(1) solid $white;
+    border-radius: rem(3);
     background-color: transparent;
-    transition: all 0.3s ease 0s;
+    transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
     text-transform: uppercase;
     @media (any-hover: hover) {
         &:hover {
@@ -33,4 +17,3 @@
         }
     }
 }
-//</BUTTONS>====================================================================================================

@@ -70,6 +70,7 @@
 		"webpack-stream": "latest"
 	},
 	"dependencies": {
+		"rellax": "^1.12.1",
 		"simplebar": "latest"
 	}
 }

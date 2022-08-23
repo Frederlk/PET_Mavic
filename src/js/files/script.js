@@ -1,23 +1,9 @@
-// Подключение функционала "Чертогов Фрилансера"
-import { isMobile } from "./functions.js";
-// Подключение списка активных модулей
-import { flsModules } from "./modules.js";
+import Rellax from "rellax";
 
-$(document).ready(function () {
-    window.onload = function () {
-        if ($(".screen__image")) {
-            var rellax = new Rellax(".screen__image", {
-                center: true,
-            });
-        }
-        //main-slider
-        //========================================================================================================================================================
-        $(".slider-what__slick").slick({
-            nextArrow: $(".screen-what .slider-what__nav-item_next"),
-            prevArrow: $(".screen-what .slider-what__nav-item_prev"),
-            zIndex: 10,
-            speed: 800,
-            fade: true,
+window.onload = function () {
+    if (document.querySelector(".screen__image-ibg")) {
+        new Rellax(".screen__image-ibg", {
+            center: true,
         });
-    };
-});
+    }
+};
